@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Table Lab</title>
+
+<!-- 從 cdn 外掛 jquery -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+<script src="http://openlayers.org/api/OpenLayers.js"></script>
+<link rel="stylesheet" href="http://openlayers.org/api/theme/default/style.css" type="text/css" />
+  
+ 
+ <!-- 新北水利局的Key -->
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyATLGyfl9CPE_Jkae4OP50N_DUjFM6Ma3M"></script>
+	<meta name="viewport" content="initial-scale=1.0">
+   <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    
+    
+    <!-- JavaScript 處理Kml -->
+    <script>
+    
+    var map;
+
+    function init() {
+        // Create the map object
+        map = new OpenLayers.Map('map');
+        // Create a Google layer
+        var gmap = new OpenLayers.Layer.Google(
+            "Google Streets", // the default
+            {numZoomLevels: 20}
+        );
+        // Add layer to map
+        map.addLayer(gmap);
+
+        //Adding KML file to map
+        map.addLayer(new OpenLayers.Layer.GML("KML", "doc.kml", 
+               {
+                format: OpenLayers.Format.KML, 
+                formatOptions: {
+                  extractStyles: true, 
+                  extractAttributes: true,
+                  maxDepth: 2
+                }
+               }));
+        // Zoom to Kuala Lumpur, Malaysia
+        map.setCenter(new OpenLayers.LonLat(24.1803764,120.6177301), 13);         
+    }
+    </script>
+    
+    
+    
+    </head>
+    <body onload="init()">
+    <h1 id="title">Google Layer with KML file</h1>
+    <div id="map" style='width: 700px; height: 700px'></div>
+    </body>
+</html>

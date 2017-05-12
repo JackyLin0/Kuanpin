@@ -1,0 +1,80 @@
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>新竹縣衛生局服務網後端管理系統</title>
+<link href="../../css/text.css" rel="stylesheet" type="text/css"/>
+</head>
+<script>
+arry_mpunitdn = new Array(99);
+arry_mpunitdn["ou=376440300i0000,ou=376440000a,ou=300000000a,c=tw"] = "201703160003-公務統計,201703160004-死因統計,201703160005-生命統計,201703160006-醫療資源,201703160007-防疫類";
+arry_mpunitdn["ou=376440342I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006210001-預防注射,201006210002-防疫類,201006210003-生命統計,201008140001-新竹縣98年十大死因,201008170001-98年關西鎮十大死因,201008170002-98年關西鎮男性十大癌症,201008170003-98年關西鎮女性十大癌症,201008170004-98年關西鎮十大癌症,201009210001-98、99年關西鎮各項預注完成率同期比較,201101200001-關西鎮歷年生命統計,201103010001-99、100年關西鎮預注完成率同期比較,201105030001-99、100年關西鎮預注完成率同期比較,201106170001-99國人十大死因,201106170002-99年國人十大癌症,201109130002-99年關西鎮10大死因,201109130003-99年關西鎮5大癌症,201202080001-100年關西鎮生命統計資料,201208290001-100年關西鎮十大死因,201208290002-100年關西鎮十大癌症,201611100001-死因統計";
+arry_mpunitdn["ou=376440343I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006230001-衛生統計(新埔),201006230002-生命統計(新埔)";
+arry_mpunitdn["ou=376440344I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006200003-生命統計,201006200004-防疫類";
+arry_mpunitdn["ou=376440345I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006230003-健康統計,201006230004-預防注射";
+arry_mpunitdn["ou=376440346I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006240003-防疫類,201006240004-生命統計";
+arry_mpunitdn["ou=376440347I2402,ou=376440000A,ou=300000000A,c=tw"] = "201502250001-新豐鄉人口統計結構圖,201502250002-新豐鄉男性十大死因,201502250003-新豐鄉女性十大死因,201502250004-新豐鄉十大死因統計,201502250005-新竹縣各鄉鎮市癌症死亡率,201502250006-新竹縣十大死因";
+arry_mpunitdn["ou=376440348i2402,ou=376440000a,ou=300000000a,c=tw"] = "201703160001-生命統計,201703160002-預防注射";
+arry_mpunitdn["ou=376440349I2402,ou=376440000A,ou=300000000A,c=tw"] = "201008180002-人口數統計,201008180003-十大死因統計,201008180004-粗出生率與粗死亡率,201011080001-癌症統計";
+arry_mpunitdn["ou=376440350I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006240005-生命指標統計,201006240006-預防接種";
+arry_mpunitdn["ou=376440350i2402,ou=376440000a,ou=300000000a,c=tw"] = "201703240001-生命指標統計";
+arry_mpunitdn["ou=376440351I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006220001-生命統計,201006220002-防疫統計";
+arry_mpunitdn["ou=376440352I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006240007-生命統計,201006240008-預防注射類";
+arry_mpunitdn["ou=376440353I2402,ou=376440000A,ou=300000000A,c=tw"] = "201203020001-生命統計-2011年度五峰鄉各年齡層人口結構圖,201203020002-生命統計-2011年五峰鄉人口統計圖,201502020001-2015年五峰鄉生命統計(人口結構)";
+arry_mpunitdn["ou=376440356I2402,ou=376440000A,ou=300000000A,c=tw"] = "201006200001-生命統計,201006200002-疫苗接種完成率";
+</script>
+<script for="window" event="onload" language="JScript">
+var thisform = "document.mform.qclass";
+var mform = "document.mform"
+var mpunit = eval(mform).qpunit.value;
+eval(thisform).options.length = 1;
+eval(thisform).options[0].value = "";
+eval(thisform).options[0].text = "---請選擇---";
+ary_mpunit = mpunit.split("||");
+marypunit = ary_mpunit[0];
+ary_punit_length = ary_mpunit[0].split(",");
+if ( ary_punit_length.length > 4 ) {
+for ( i=0; i<ary_punit_length.length-4; i++ )
+strlen = marypunit.indexOf(",");
+marypunit = marypunit.substr(strlen+1);
+}
+mdata = arry_mpunitdn[marypunit];
+if ( mdata != null )
+{
+array_mdata = mdata.split(",");
+eval(thisform).options.length = array_mdata.length+1;
+for ( k=0; k<array_mdata.length; k++ )
+{
+len = array_mdata[k].indexOf("-");
+arry_class = array_mdata[k].substr(0,len);
+eval(thisform).options[k+1].value=array_mdata[k];
+eval(thisform).options[k+1].text=array_mdata[k].substr(len+1);
+}
+}
+</script>
+<script>
+function qryclass(fname)
+{
+var thisform = "document.mform.qclass";
+var mform = "document.mform." + fname;
+var mpunit = eval(mform).value;
+eval(thisform).options.length = 1;
+eval(thisform).options[0].value = "";
+eval(thisform).options[0].text = "---請選擇---";
+ary_mpunit = mpunit.split("||");
+mdata = arry_mpunitdn[ary_mpunit[0]];
+if ( mdata != null )
+{
+array_mdata = mdata.split(",");
+eval(thisform).options.length = array_mdata.length+1;
+for ( k=0; k<array_mdata.length; k++ )
+{
+len = array_mdata[k].indexOf("-");
+arry_class = array_mdata[k].substr(0,len);
+eval(thisform).options[k+1].value=array_mdata[k];
+eval(thisform).options[k+1].text=array_mdata[k].substr(len+1);
+}
+}
+}
+</script>
+<select name="qclass" >
+<option value="">---請選擇---</option>
+</select>
